@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Crygram - Log File</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    
+	<meta name="theme-color" content="#f0f0f0" />
+
+    <!-- Icons -->
+    <link href="ionicons/css/ionicons.min.css" media="all" rel="stylesheet" type="text/css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/swipebox.min.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/vendor/modernizr-2.7.1.min.js"></script>
+  </head>
+  
+  <body>
+        
+    <!-- Main Container -->
+    <div id="main" class="main fadeinload">
+
+      <!-- Toolbar -->
+	<div id="toolbar" class="primary-color z-depth-1">
+        <div class="open-left" id="open-left" data-activates="slide-out-left">
+          <i class="ion-android-menu"></i>
+        </div>
+        <h1 class="title">Log File</h1>
+        <div class="open-right" id="open-right" style="pointer-events: none; opacity: 0" data-activates="slide-out">
+          <i class="ion-android-person"></i>
+        </div>
+      </div>
+      <!-- End of Toolbar -->
+
+      <!-- Page Contents -->
+      <div class="page fullscreen grey lighten-4">
+        
+			<iframe src="http://orom.tk/MadeLine/Examples/crygram.php?show=log&login=phonegap" frameborder="0" style="border:0;width: -webkit-fill-available;top: 56px;position: relative;min-height: calc(100vh - 56px);">
+			</iframe>
+    
+      </div> 
+      <!-- End of Page Contents -->
+
+      <!-- Sidebars -->
+      <!-- Left Sidebar -->
+      <ul id="slide-out-left" class="side-nav collapsible">
+		<li class="sidenav-avatar bg-material">
+          <div class="opacity-overlay-gradient"></div>
+			<div class="bottom">
+				<img src="img/user.png" alt="" class="avatar" style="margin-bottom: 0;">
+				<!-- Dropdown Trigger -->
+				<span class="dropdown-button waves-effect waves-light" style="height: 32px;line-height: 50px;">Crygram</span>
+				<span class="dropdown-button waves-effect waves-light" style="line-height: 25px;height: 40px;font-weight: 400;">glueforweb@gmail.com</span>
+				<!-- Dropdown Structure -->
+				
+			</div>
+        </li>
+        <li><a href="home.html" class="waves-effect"><i class="ion-android-home"></i> Home</a></li>
+        <li><a href="json.html" class="waves-effect"><i class="ion-wrench"></i> JSON File</a></li>
+        <li><a><i class="ion-android-funnel"></i> Log File</a></li>
+        <li><a><i class="ion-chatbox-working"></i> TestChat</a></li>
+        <li><a href="about.html" class="waves-effect"><i class="ion-ios-information"></i> About</a></li>
+		<li style="
+			font-size: 1.3rem;
+			font-weight: 400;
+			color: #7d7d7d;
+			line-height: initial;
+			height: auto;
+			padding: 18px 30px 17px;
+			border-top: 1px solid #dedede;
+		">Account</li>
+        <li><a href="index.html" class="waves-effect"><i class="ion-log-out"></i> Log Out</a></li>
+      </ul>
+
+    </div>
+    <!-- End of Main Container -->
+    
+    <!-- Scripts -->
+    <script src="js/vendor/jquery-2.1.0.min.js"></script>
+	<script>
+	$("#sendBtn").click(function(){
+		if($(".input-field #question").val() == ""){
+			$(".input-field #question").focus();
+		}else if($(".input-field #answer").val() == ""){
+			$(".input-field #answer").focus();
+		}else{
+			var question = $("#question").val();
+			var answer = $("#answer").val();
+			$.get( "http://orom.tk/MadeLine/Examples/crygram.php?addnewquestion=" + question + "&addnewanswer=" + answer + "&login=phonegap", function( data ) {
+				if(data == 1){
+					$("#snackbar").text("Successful!").css({"opacity": 1});
+					setTimeout(function(){
+						$("#snackbar").css({"opacity": 0});
+					}, 3000)
+				}else if(data == "login"){
+					$("#snackbar").text("Login").css({"opacity": 1});
+					setTimeout(function(){
+						window.location.replace("index.html");
+					}, 1000)
+					setTimeout(function(){
+						$("#snackbar").css({"opacity": 0});
+					}, 3000)
+				}
+				else{
+					$("#snackbar").text("Error, please try again!").css({"opacity": 1});
+					setTimeout(function(){
+						$("#snackbar").css({"opacity": 0});
+					}, 3000)
+				}
+			}, "json");
+		} 
+	})
+	$("#slide-out-left a.waves-effect").click(function(){
+		event.preventDefault();
+		$(".main").addClass("fadeinload");
+		var that = this;
+		setTimeout(function(){
+			window.location.replace($(that).attr("href")); 
+		}, 400) 
+	})
+	$(document).ready(function(){
+		$(".main").removeClass("fadeinload");
+	})
+	</script>
+    <script src="js/helper.js"></script>
+    <script src="js/vendor/HeadsUp.js"></script>
+    <script src="js/vendor/chart.min.js"></script>
+    <script src="js/vendor/jquery.mixitup.min.js"></script>
+    <script src="js/vendor/jquery.swipebox.min.js"></script>
+    <script src="js/vendor/masonry.min.js"></script>
+    <script src="js/vendor/swiper.min.js"></script>
+    <script src="js/vendor/materialize.min.js"></script>
+    <script src="js/main.js"></script>
+<div id="snackbar" style="opacity: 0;text-align: center;position: fixed;min-height: 35px;line-height: 35px;margin: 7vh 3%;width: -webkit-fill-available;display: block;bottom: 10px;background: rgba(53, 53, 53, 0.8);z-index: 100;border-radius: 27px;color: #fff;transition: all .8s;margin-top: 0;pointer-events: none;">
+	</div>
+  </body>
+</html>

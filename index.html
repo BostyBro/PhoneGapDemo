@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Crygram - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    
+	<meta name="theme-color" content="#f0f0f0" />
+
+    <!-- Icons -->
+    <link href="ionicons/css/ionicons.min.css" media="all" rel="stylesheet" type="text/css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/vendor/modernizr-2.7.1.min.js"></script>
+  </head>
+  
+  <body>
+        
+    <!-- Main Container -->
+    <div id="main" class="main">
+
+      <!-- Toolbar -->
+      <div id="toolbar" class="primary-color tool-login">
+
+      </div>
+      <!-- End of Toolbar -->
+
+      <!-- Page Contents -->
+      <div class="page fullscreen grey lighten-4">
+        
+        <div class="login-form z-depth-1">
+          <h1>Login</h1>
+          <div class="input-field">
+            <i class="ion-android-contact prefix"></i> 
+            <input class="validate" id="login" type="text"> 
+            <label for="login">Username</label>
+          </div>
+
+          <div class="input-field" style="margin-bottom:20px;">
+            <i class="ion-android-lock prefix"></i> 
+            <input class="validate" id="login-psw" type="password"> 
+            <label for="login-psw">Password</label>
+          </div>
+
+          <a class="waves-effect waves-light btn-large accent-color block m-b-20 animated bouncein delay-2" id="loginBtn">Login</a> 
+          <p style="text-align: center">Forgot password? Ask me for at Telegram <a class="primary-text" href="https://t.me/StateGhost">@StateGhost</a></p>
+        </div>
+    
+      </div> 
+      <!-- End of Page Contents -->
+
+    
+    <!-- Scripts -->
+    <script src="js/vendor/jquery-2.1.0.min.js"></script>
+    <script src="js/vendor/materialize.min.js"></script>
+	<script>
+	$("#loginBtn").click(function(){
+		if($(".input-field #login").val() == ""){
+			$(".input-field #login").focus();
+		}else if($(".input-field #login-psw").val() == ""){
+			$(".input-field #login-psw").focus();
+		}else{
+			var pass = $("#login").val();
+			$.get( "http://orom.tk/MadeLine/Examples/cryLogin.php?loginpassword=" + pass, function( data ) {
+				if(data.user_group > 0){
+					$(".main").addClass("fadeinload");
+					setTimeout(function(){
+						window.location.replace("home.html");
+					}, 400)
+				}
+				else{
+					$("#snackbar").text("Error, please try again!").css({"opacity": 1});
+					setTimeout(function(){
+						$("#snackbar").css({"opacity": 0});
+					}, 3000)
+				}
+			}, "json");
+		}
+	})
+	</script>
+<div id="snackbar" style="opacity: 0;text-align: center;position: fixed;min-height: 35px;line-height: 35px;margin: 7vh 3%;width: -webkit-fill-available;display: block;bottom: 10px;background: rgba(53, 53, 53, 0.8);z-index: 100;border-radius: 27px;color: #fff;transition: all .8s;margin-top: 0;pointer-events: none;">
+	</div>
+  </body>
+</html>
